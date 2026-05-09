@@ -1,12 +1,12 @@
 {
   "intro": {
-    "enabled": false,
+    "enabled": true,
     "showOncePerSession": false,
     "openInviteLabel": "Abrir convite",
-    "openDurationSec": 3,
-    "introFadeInSec": 0.48,
-    "mainEnterDurationSec": 0.9,
-    "mainEnterOffsetY": 22,
+    "openDurationSec": 2,
+    "introFadeInSec": 0,
+    "mainEnterDurationSec": 0,
+    "mainEnterOffsetY": 0,
     "topLabel": "PASSAPORTE",
     "subLabel": "CONVITE DE CASAMENTO",
     "coverLogoSrc": "/logo.png",
