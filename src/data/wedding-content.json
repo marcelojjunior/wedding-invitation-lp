@@ -1,0 +1,105 @@
+{
+  "intro": {
+    "enabled": true,
+    "showOncePerSession": false,
+    "openInviteLabel": "Abrir convite",
+    "openDurationSec": 3,
+    "introFadeInSec": 0.48,
+    "mainEnterDurationSec": 0.9,
+    "mainEnterOffsetY": 22,
+    "topLabel": "PASSAPORTE",
+    "subLabel": "CONVITE DE CASAMENTO",
+    "coverLogoSrc": "/logo.png",
+    "coverLogoAlt": "Monograma Marília e Davy",
+    "coupleLine": "Marília & Davy",
+    "dateLine": "18.10.2026"
+  },
+  "meta": {
+    "siteTitle": "Marília &  Davy",
+    "siteDescription": "Convite digital: nossa viagem até o grande dia em Balsas, Maranhão — 18 de outubro de 2026.",
+    "canonicalUrl": "https://example.com",
+    "ogImage": "/og.jpg"
+  },
+  "hero": {
+    "headlineLine1": "Toda viagem tem um destino.",
+    "headlineLine2": "A nossa sempre foi um ao outro.",
+    "ctaLabel": "Fazer check-in",
+    "ctaUrl": "https://noivos.casar.com/marilia-e-davy",
+    "airportCodes": { "from": "LOV", "to": "BSL" },
+    "routeCaption": "Conexão em amor · Direto",
+    "coordinatesDisplay": "07°31′S · 46°02′W",
+    "boardingWindow": "16h00 · 18 Out 2026",
+    "flightMap": {
+      "enabled": true,
+      "durationSec": 22,
+      "mapSrc": "/2831458.svg"
+    }
+  },
+  "story": {
+    "bibleQuote": "“Para onde quer que fores, irei eu; e onde quer que pousares à noite, ali pousarei eu. O teu povo será o meu povo, o teu Deus será o meu Deus.”",
+    "bibleReference": "Rute 1:16",
+    "narrative": "Depois de quilômetros, chamadas de vídeo, saudades e espera, chegou o momento da nossa chegada mais importante."
+  },
+  "event": {
+    "labels": {
+      "destination": "DESTINO",
+      "boardingDate": "DATA DE EMBARQUE",
+      "departureTime": "HORÁRIO DE PARTIDA",
+      "location": "LOCAL"
+    },
+    "destination": "Balsas — Maranhão",
+    "boardingDate": "18 de Outubro de 2026",
+    "departureTime": "16h00",
+    "venueName": "Casa Grande Eventos",
+    "addressLine": "Balsas, MA — endereço completo no mapa",
+    "mapsUrl": "https://maps.google.com/?q=Casa+Grande+Eventos+Balsas+MA",
+    "mapEmbedUrl": ""
+  },
+  "qrCards": [
+    {
+      "id": "rsvp",
+      "title": "RSVP",
+      "body": "Realizar check-in no evento no site do casamento.",
+      "url": "https://noivos.casar.com/marilia-e-davy",
+      "accent": "rsvp"
+    },
+    {
+      "id": "gifts",
+      "title": "Lista de presentes",
+      "body": "Bagagem especial para os noivos.",
+      "url": "https://noivos.casar.com/marilia-e-davy#/presentes",
+      "accent": "gifts"
+    },
+    {
+      "id": "pix",
+      "title": "PIX",
+      "body": "Ajude a financiar nosso próximo destino.",
+      "url": "https://example.com/pix-ou-chave",
+      "pixCopyPaste": "00000000000",
+      "accent": "pix"
+    }
+  ],
+  "dressCode": {
+    "headline": "Traje social elegante.",
+    "subtitle": "Por favor, evite as cores abaixo para que as noivas se destaquem no dia.",
+    "forbidden": [
+      { "key": "butter", "label": "Amarelo manteiga", "hex": "#f3e4a8" },
+      { "key": "green", "label": "Verde", "hex": "#6b8f71" },
+      { "key": "lightBlue", "label": "Azul claro", "hex": "#9ebdd4" },
+      { "key": "navy", "label": "Azul marinho", "hex": "#2c3d55" }
+    ]
+  },
+  "footer": {
+    "departuresLabel": "Partidas",
+    "gateLabel": "Portão",
+    "coordinatesLabel": "Coordenadas",
+    "gate": "18 · 10 · 26",
+    "coordinates": "07°31′S · 46°02′W",
+    "boardRows": [
+      { "flight": "LOV → BSL", "status": "On time", "time": "16:00" },
+      { "flight": "HOME → FOREVER", "status": "Boarding", "time": "15:45" },
+      { "flight": "SKY → UNION", "status": "Final call", "time": "15:55" }
+    ],
+    "closingLine": "Nos vemos no portão 18.10.26"
+  }
+}

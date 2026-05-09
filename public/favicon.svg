@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Alianças">
+  <rect width="32" height="32" rx="7" fill="#fdfbf7"/>
+  <g
+    fill="none"
+    stroke="#a67f52"
+    stroke-width="2.15"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <ellipse cx="12.6" cy="16" rx="6.1" ry="7.6" transform="rotate(-22 12.6 16)"/>
+    <ellipse cx="19.4" cy="16" rx="6.1" ry="7.6" transform="rotate(22 19.4 16)"/>
+  </g>
+</svg>
