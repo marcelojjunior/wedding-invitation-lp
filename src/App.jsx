@@ -79,28 +79,12 @@ export default function App() {
       }
     }
     setShowIntro(false);
+    requestAnimationFrame(() => ScrollTrigger.refresh());
   }, [content.intro?.showOncePerSession]);
 
   const mainEnterSec = resolveMainEnterSec(content.intro?.mainEnterDurationSec);
   const mainOffsetY = resolveMainOffsetY(content.intro?.mainEnterOffsetY);
   const easeOutSoft = [0.22, 1, 0.36, 1];
-
-  const deferMainForIntro =
-    showIntro && content.intro?.enabled && !reducedMotion;
-
-  useEffect(() => {
-    if (deferMainForIntro) return undefined;
-    let id2 = 0;
-    const id1 = requestAnimationFrame(() => {
-      id2 = requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
-      });
-    });
-    return () => {
-      cancelAnimationFrame(id1);
-      if (id2) cancelAnimationFrame(id2);
-    };
-  }, [deferMainForIntro]);
 
   useEffect(() => {
     document.title = content.meta.siteTitle;
@@ -141,26 +125,17 @@ export default function App() {
           ease: easeOutSoft,
         }}
       >
-        {deferMainForIntro ? (
-          <div
-            className="min-h-dvh shrink-0 lg:min-h-[60dvh]"
-            aria-hidden
-          />
-        ) : (
-          <>
-            <HeroSection
-              data={content.hero}
-              coupleLine={content.intro?.coupleLine}
-            />
-            <Suspense fallback={<BelowFoldFallback />}>
-              <StorySection data={content.story} />
-              <EventSection data={content.event} />
-              <QRCodesSection cards={content.qrCards} />
-              <DressCodeSection data={content.dressCode} />
-              <FooterSection data={content.footer} />
-            </Suspense>
-          </>
-        )}
+        <HeroSection
+          data={content.hero}
+          coupleLine={content.intro?.coupleLine}
+        />
+        <Suspense fallback={<BelowFoldFallback />}>
+          <StorySection data={content.story} />
+          <EventSection data={content.event} />
+          <QRCodesSection cards={content.qrCards} />
+          <DressCodeSection data={content.dressCode} />
+          <FooterSection data={content.footer} />
+        </Suspense>
       </motion.main>
     </SmoothScrollProvider>
   );
