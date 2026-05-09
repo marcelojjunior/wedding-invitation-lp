@@ -13,9 +13,7 @@ export function HeroSection({ data }) {
   const ctaUrl = data.ctaUrl ?? "https://noivos.casar.com/marilia-e-davy";
   const showFlightMap = data.flightMap?.enabled !== false;
   const coupleLine = data.coupleLine;
-  const hasCoupleBlockAboveMap = Boolean(
-    coupleLine || data.subLabel || data.dateLine,
-  );
+  const hasCoupleBlockAboveMap = Boolean(coupleLine || data.subLabel);
   const showNamesClusterAboveMap = Boolean(
     showFlightMap && hasCoupleBlockAboveMap,
   );
@@ -27,6 +25,8 @@ export function HeroSection({ data }) {
         animate: { opacity: 1, y: 0 },
         transition: { duration: 1.15, ease: [0.22, 1, 0.36, 1] },
       };
+
+  const ticket = data.boardingTicket;
 
   return (
     <Section
@@ -75,11 +75,6 @@ export function HeroSection({ data }) {
                     {coupleLine}
                   </p>
                 ) : null}
-                {data.dateLine ? (
-                  <p className="font-serif text-sm leading-snug text-ink-800/90 sm:text-[0.95rem]">
-                    {data.dateLine}
-                  </p>
-                ) : null}
               </motion.div>
             ) : null}
             <div className="min-h-0 min-w-0 flex-1">
@@ -125,26 +120,54 @@ export function HeroSection({ data }) {
                     ease: [0.22, 1, 0.36, 1],
                   },
                 })}
-            className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between lg:flex-col xl:flex-row xl:items-end xl:justify-between"
+            className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"
           >
-            <div className="flex flex-wrap items-center gap-6 text-sm text-ink-700/85">
-              <div className="flex items-center gap-2 rounded-boarding border border-ink-800/10 bg-white/30 px-4 py-2 font-mono text-xs uppercase tracking-wider backdrop-blur-sm">
-                <span className="text-gold-500">{data.airportCodes.from}</span>
-                <Plane className="size-3.5 rotate-0 text-nude-400" aria-hidden />
-                <span className="text-gold-500">{data.airportCodes.to}</span>
-              </div>
-              <div>
-                <p className="text-[0.65rem] uppercase tracking-[0.2em] text-ink-700/55">
-                  Coordenadas
-                </p>
-                <p className="font-mono text-xs">{data.coordinatesDisplay}</p>
-              </div>
-              <div>
-                <p className="text-[0.65rem] uppercase tracking-[0.2em] text-ink-700/55">
-                  Embarque
-                </p>
-                <p className="font-mono text-xs">{data.boardingWindow}</p>
-              </div>
+            <div className="w-full min-w-0 lg:max-w-none lg:flex-1">
+              {ticket ? (
+                <div
+                  className={cn(
+                    "relative overflow-hidden rounded-2xl border border-ink-800/12",
+                    "bg-cream-100/92 shadow-[0_1px_0_rgba(47,40,32,0.06),inset_0_1px_0_rgba(255,255,255,0.45)]",
+                  )}
+                  role="group"
+                  aria-label="Cartão de embarque"
+                >
+                  <div className="grid grid-cols-3 divide-x divide-dotted divide-ink-800/18">
+                    <div className="flex min-w-0 flex-col items-center justify-center gap-0.5 px-2.5 py-4 text-center sm:gap-1 sm:px-5 sm:py-5 sm:pl-6 sm:pr-5 lg:py-4">
+                      <span className="font-serif text-xl font-medium leading-none text-ink-800 sm:text-[clamp(1.45rem,3.2vw,1.7rem)] lg:text-[clamp(1.2rem,1.35vw,1.35rem)]">
+                        {ticket.originCode}
+                      </span>
+                      <span className="max-w-[6rem] font-sans text-[0.64rem] font-medium uppercase leading-snug tracking-[0.08em] text-ink-700/85 sm:max-w-[12rem] sm:text-[0.7rem] sm:tracking-[0.12em] lg:text-[0.65rem] lg:tracking-[0.1em]">
+                        {ticket.originCityLine}
+                      </span>
+                    </div>
+                    <div className="flex min-w-0 flex-col items-center justify-center gap-1.5 px-2.5 py-4 text-center sm:gap-3 sm:px-6 sm:py-5 lg:gap-2 lg:py-4">
+                      <p className="font-sans text-[0.58rem] font-medium uppercase tracking-[0.11em] text-ink-700/65 sm:text-[0.65rem] sm:tracking-[0.22em] lg:text-[0.6rem] lg:tracking-[0.18em]">
+                        {ticket.midLabel}
+                      </p>
+                      <p className="font-serif text-[0.74rem] font-medium uppercase leading-tight tracking-[0.04em] text-ink-800 sm:text-base sm:tracking-[0.06em] lg:text-sm">
+                        {ticket.midHeadline}
+                      </p>
+                      <div
+                        className="flex w-full max-w-[3.5rem] items-center gap-0.5 sm:max-w-[13rem] sm:gap-2"
+                        aria-hidden
+                      >
+                        <span className="h-px min-w-0 flex-1 bg-ink-800/[0.22]" />
+                        <Plane className="size-3 shrink-0 text-ink-800/55 sm:size-3.5 lg:size-3" />
+                        <span className="h-px min-w-0 flex-1 bg-ink-800/[0.22]" />
+                      </div>
+                    </div>
+                    <div className="flex min-w-0 flex-col items-center justify-center gap-0.5 px-2.5 py-4 text-center sm:gap-1 sm:px-5 sm:py-5 sm:pl-5 sm:pr-6 lg:py-4">
+                      <span className="font-serif text-base font-medium text-ink-800 sm:text-base lg:text-sm">
+                        {ticket.gateLabel}
+                      </span>
+                      <span className="font-serif text-lg font-medium tabular-nums leading-none text-ink-800 sm:text-[clamp(1.15rem,2.6vw,1.45rem)] lg:text-[clamp(1rem,1.2vw,1.15rem)]">
+                        {ticket.gateDate}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             <a

@@ -20,15 +20,19 @@
   "hero": {
     "coupleLine": "Marília & Davy",
     "subLabel": "CONVITE DE CASAMENTO",
-    "dateLine": "18.10.2026",
     "headlineLine1": "Toda viagem tem um destino.",
     "headlineLine2": "A nossa sempre foi um ao outro.",
     "ctaLabel": "Fazer check-in",
     "ctaUrl": "https://noivos.casar.com/marilia-e-davy",
-    "airportCodes": { "from": "LOV", "to": "BSL" },
     "routeCaption": "Conexão em amor · Direto",
-    "coordinatesDisplay": "07°31′S · 46°02′W",
-    "boardingWindow": "16h00 · 18 Out 2026",
+    "boardingTicket": {
+      "originCode": "BLS",
+      "originCityLine": "BALSAS - MA",
+      "midLabel": "NOSSO DESTINO",
+      "midHeadline": "PARA SEMPRE",
+      "gateLabel": "GATE",
+      "gateDate": "18.10.26"
+    },
     "flightMap": {
       "enabled": true,
       "durationSec": 22,
