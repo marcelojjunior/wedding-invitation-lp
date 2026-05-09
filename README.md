@@ -1,6 +1,6 @@
 # wedding-invitation-lp
 
-Single-page wedding invitation and event microsite: passport-style intro, travel-themed hero, ceremony details, dress code, QR shortcuts, and footer — with copy driven from structured JSON.
+Single-page wedding invitation and event microsite: travel-themed hero, ceremony details, dress code, QR shortcuts, and footer — with copy driven from structured JSON.
 
 The build prioritizes a calm, editorial feel with smooth scrolling, motion that respects reduced preferences, and lazy-loaded sections for a lighter first paint.
 
@@ -8,7 +8,7 @@ The build prioritizes a calm, editorial feel with smooth scrolling, motion that 
 
 This landing page includes:
 
-- animated passport intro (3D-style cover, optional once-per-session) with Lenis scroll lock while open
+- optional full-screen cover intro (slide off to reveal the page) configurable in `wedding-content.json`
 - hero with gradient backdrop, flight map, GSAP plane path, couple line, and primary CTA
 - story and event blocks sourced from data
 - QR code strip and dress code guidance
@@ -44,14 +44,14 @@ This landing page includes:
 ```text
 src/
   animations/      Shared animation helpers
-  components/      common (intro, map, particles), layout, ui
+  components/      common (cover intro, map, particles), layout, ui
   constants/       Section ids and shared constants
   data/            wedding-content.json (copy and config)
   hooks/           Content, scroll, reduced motion
   providers/       Lenis smooth scroll + navigation context
   sections/        hero, story, event, qr-codes, dress-code, footer
   utils/           Class name helpers
-  App.jsx          Shell, intro gate, lazy sections
+  App.jsx          Shell and lazy sections
   main.jsx
   index.css        Theme tokens and global styles
 public/

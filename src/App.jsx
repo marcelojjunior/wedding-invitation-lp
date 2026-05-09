@@ -1,8 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { PassportIntro } from "./components/common/PassportIntro";
+import { SimpleCoverIntro } from "./components/common/SimpleCoverIntro";
 import { useReducedMotion } from "./hooks/useReducedMotion";
 import { useWeddingContent } from "./hooks/useWeddingContent";
 import { SmoothScrollProvider } from "./providers/SmoothScrollProvider";
@@ -10,21 +9,7 @@ import { HeroSection } from "./sections/hero/HeroSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const INTRO_STORAGE_KEY = "wedding-passport-intro-v1";
-
-function resolveMainEnterSec(value) {
-  if (value == null || value === "") return 0.88;
-  const n = Number(value);
-  if (!Number.isFinite(n)) return 0.88;
-  return Math.min(2, Math.max(0.2, n));
-}
-
-function resolveMainOffsetY(value) {
-  if (value == null || value === "") return 22;
-  const n = Number(value);
-  if (!Number.isFinite(n)) return 22;
-  return Math.min(56, Math.max(0, n));
-}
+const INTRO_STORAGE_KEY = "wedding-cover-intro-v1";
 
 const StorySection = lazy(() =>
   import("./sections/story/StorySection").then((m) => ({ default: m.StorySection })),
@@ -43,7 +28,9 @@ const DressCodeSection = lazy(() =>
   })),
 );
 const FooterSection = lazy(() =>
-  import("./sections/footer/FooterSection").then((m) => ({ default: m.FooterSection })),
+  import("./sections/footer/FooterSection").then((m) => ({
+    default: m.FooterSection,
+  })),
 );
 
 function BelowFoldFallback() {
@@ -79,12 +66,10 @@ export default function App() {
       }
     }
     setShowIntro(false);
-    requestAnimationFrame(() => ScrollTrigger.refresh());
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
   }, [content.intro?.showOncePerSession]);
-
-  const mainEnterSec = resolveMainEnterSec(content.intro?.mainEnterDurationSec);
-  const mainOffsetY = resolveMainOffsetY(content.intro?.mainEnterOffsetY);
-  const easeOutSoft = [0.22, 1, 0.36, 1];
 
   useEffect(() => {
     document.title = content.meta.siteTitle;
@@ -97,7 +82,7 @@ export default function App() {
   return (
     <SmoothScrollProvider smoothScrollEnabled={smoothScrollEnabled}>
       {showIntro && content.intro?.enabled ? (
-        <PassportIntro
+        <SimpleCoverIntro
           intro={content.intro}
           onComplete={handleIntroDone}
           skipAnimation={reducedMotion}
@@ -110,25 +95,8 @@ export default function App() {
         Pular para o início
       </a>
       <div className="grain" aria-hidden />
-      <motion.main
-        id="main-content"
-        initial={
-          reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: mainOffsetY }
-        }
-        animate={
-          reducedMotion || !showIntro
-            ? { opacity: 1, y: 0 }
-            : { opacity: 0, y: mainOffsetY }
-        }
-        transition={{
-          duration: reducedMotion ? 0 : mainEnterSec,
-          ease: easeOutSoft,
-        }}
-      >
-        <HeroSection
-          data={content.hero}
-          coupleLine={content.intro?.coupleLine}
-        />
+      <main id="main-content">
+        <HeroSection data={content.hero} />
         <Suspense fallback={<BelowFoldFallback />}>
           <StorySection data={content.story} />
           <EventSection data={content.event} />
@@ -136,7 +104,7 @@ export default function App() {
           <DressCodeSection data={content.dressCode} />
           <FooterSection data={content.footer} />
         </Suspense>
-      </motion.main>
+      </main>
     </SmoothScrollProvider>
   );
 }

@@ -2,17 +2,14 @@
   "intro": {
     "enabled": true,
     "showOncePerSession": false,
-    "openInviteLabel": "Abrir convite",
-    "openDurationSec": 2,
-    "introFadeInSec": 0,
-    "mainEnterDurationSec": 0,
-    "mainEnterOffsetY": 0,
     "topLabel": "PASSAPORTE",
     "subLabel": "CONVITE DE CASAMENTO",
     "coverLogoSrc": "/logo.png",
     "coverLogoAlt": "Monograma Marília e Davy",
     "coupleLine": "Marília & Davy",
-    "dateLine": "18.10.2026"
+    "dateLine": "18.10.2026",
+    "openInviteLabel": "Abrir convite",
+    "slideOutSec": 3
   },
   "meta": {
     "siteTitle": "Marília & Davy - Convite de Casamento",
@@ -21,6 +18,9 @@
     "ogImage": "/og.jpg"
   },
   "hero": {
+    "coupleLine": "Marília & Davy",
+    "subLabel": "CONVITE DE CASAMENTO",
+    "dateLine": "18.10.2026",
     "headlineLine1": "Toda viagem tem um destino.",
     "headlineLine2": "A nossa sempre foi um ao outro.",
     "ctaLabel": "Fazer check-in",

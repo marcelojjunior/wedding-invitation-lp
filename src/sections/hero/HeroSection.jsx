@@ -8,11 +8,17 @@ import { Section } from "../../components/layout/Section";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { cn } from "../../utils/cn";
 
-export function HeroSection({ data, coupleLine }) {
+export function HeroSection({ data }) {
   const reduced = useReducedMotion();
   const ctaUrl = data.ctaUrl ?? "https://noivos.casar.com/marilia-e-davy";
   const showFlightMap = data.flightMap?.enabled !== false;
-  const showNamesAboveMap = Boolean(showFlightMap && coupleLine);
+  const coupleLine = data.coupleLine;
+  const hasCoupleBlockAboveMap = Boolean(
+    coupleLine || data.subLabel || data.dateLine,
+  );
+  const showNamesClusterAboveMap = Boolean(
+    showFlightMap && hasCoupleBlockAboveMap,
+  );
 
   const softFade = reduced
     ? { initial: false, animate: { opacity: 1, y: 0 } }
@@ -40,11 +46,10 @@ export function HeroSection({ data, coupleLine }) {
 
       <Container className="relative z-0 flex min-h-0 w-full flex-1 flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-12 xl:gap-14">
         {showFlightMap ? (
-          <div className="order-1 flex w-full max-w-full flex-col gap-4 max-lg:flex-1 max-lg:min-h-[200px] shrink-0 lg:order-2 lg:max-h-[min(52vh,520px)] lg:w-[min(42%,440px)] lg:max-w-[460px] xl:w-[min(40%,500px)]">
-            {showNamesAboveMap ? (
-              <motion.p
-                className="text-center font-serif text-[clamp(2.1rem,7vw,3.25rem)] leading-tight text-gold-500 lg:text-left"
-                style={{ fontFamily: "var(--font-script)" }}
+          <div className="order-1 flex w-full max-w-full flex-col gap-2 max-lg:flex-1 max-lg:min-h-[200px] shrink-0 lg:order-2 lg:max-h-[min(52vh,520px)] lg:w-[min(42%,440px)] lg:max-w-[460px] xl:w-[min(40%,500px)]">
+            {showNamesClusterAboveMap ? (
+              <motion.div
+                className="flex flex-col gap-0.5 text-center sm:gap-1 lg:text-left"
                 {...(reduced
                   ? { initial: false, animate: { opacity: 1, y: 0 } }
                   : {
@@ -57,8 +62,25 @@ export function HeroSection({ data, coupleLine }) {
                       },
                     })}
               >
-                {coupleLine}
-              </motion.p>
+                {data.subLabel ? (
+                  <p className="font-serif text-[0.7rem] font-medium uppercase tracking-[0.28em] text-gold-500 sm:text-[0.75rem]">
+                    {data.subLabel}
+                  </p>
+                ) : null}
+                {coupleLine ? (
+                  <p
+                    className="text-[clamp(2.1rem,7vw,3.25rem)] leading-[1.1] text-gold-500"
+                    style={{ fontFamily: "var(--font-script)" }}
+                  >
+                    {coupleLine}
+                  </p>
+                ) : null}
+                {data.dateLine ? (
+                  <p className="font-serif text-sm leading-snug text-ink-800/90 sm:text-[0.95rem]">
+                    {data.dateLine}
+                  </p>
+                ) : null}
+              </motion.div>
             ) : null}
             <div className="min-h-0 min-w-0 flex-1">
               <HeroFlightMap
