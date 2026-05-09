@@ -29,9 +29,7 @@ export function DressCodeSection({ data }) {
           >
             <Balancer>{data.headline}</Balancer>
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-pretty text-sm leading-relaxed text-cream-100/70 sm:text-base">
-            {data.subtitle}
-          </p>
+          <p className="mx-auto mt-5 max-w-xl text-pretty text-sm leading-relaxed text-cream-100/70 sm:text-base" dangerouslySetInnerHTML={{ __html: data.subtitle }} />
         </div>
 
         <motion.ul

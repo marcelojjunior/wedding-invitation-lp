@@ -49,7 +49,7 @@ export function HeroSection({ data }) {
           <div className="order-1 flex w-full max-w-full flex-col gap-2 max-lg:flex-1 max-lg:min-h-[200px] shrink-0 lg:order-2 lg:max-h-[min(52vh,520px)] lg:w-[min(42%,440px)] lg:max-w-[460px] xl:w-[min(40%,500px)]">
             {showNamesClusterAboveMap ? (
               <motion.div
-                className="flex flex-col gap-0.5 text-center sm:gap-1 lg:text-left"
+                className="flex flex-col gap-0.5 text-center sm:gap-1"
                 {...(reduced
                   ? { initial: false, animate: { opacity: 1, y: 0 } }
                   : {

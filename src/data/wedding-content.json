@@ -81,7 +81,7 @@
   ],
   "dressCode": {
     "headline": "Traje social elegante.",
-    "subtitle": "Por favor, evite as cores abaixo para que as noivas se destaquem no dia.",
+    "subtitle": "Algumas cores foram escolhidas especialmente para compor nossa cerimônia e estarão presentes na indentidade visual e nos trajes da família. <br /> <br /> Por isso, pedimos gentilmente que os convidados evitem tons de:",
     "forbidden": [
       { "key": "butter", "label": "Amarelo manteiga", "hex": "#f3e4a8" },
       { "key": "green", "label": "Verde", "hex": "#6b8f71" },
