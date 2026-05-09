@@ -4,7 +4,7 @@
     "showOncePerSession": false,
     "openInviteLabel": "Abrir convite",
     "openDurationSec": 3,
-    "introFadeInSec": 0.48,
+    "introFadeInSec": 0.32,
     "mainEnterDurationSec": 0.9,
     "mainEnterOffsetY": 22,
     "topLabel": "PASSAPORTE",
