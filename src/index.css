@@ -1,3 +1,21 @@
+/* Self-hosted fonts (latin + latin-ext for pt-BR) — same-origin, no Google Fonts blocking */
+@import "@fontsource/great-vibes/latin-400.css";
+@import "@fontsource/great-vibes/latin-ext-400.css";
+@import "@fontsource/manrope/latin-400.css";
+@import "@fontsource/manrope/latin-500.css";
+@import "@fontsource/manrope/latin-600.css";
+@import "@fontsource/manrope/latin-ext-400.css";
+@import "@fontsource/manrope/latin-ext-500.css";
+@import "@fontsource/manrope/latin-ext-600.css";
+@import "@fontsource/playfair-display/latin-400.css";
+@import "@fontsource/playfair-display/latin-400-italic.css";
+@import "@fontsource/playfair-display/latin-500.css";
+@import "@fontsource/playfair-display/latin-600.css";
+@import "@fontsource/playfair-display/latin-ext-400.css";
+@import "@fontsource/playfair-display/latin-ext-400-italic.css";
+@import "@fontsource/playfair-display/latin-ext-500.css";
+@import "@fontsource/playfair-display/latin-ext-600.css";
+
 @import "tailwindcss";
 
 @theme {
