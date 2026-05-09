@@ -28,6 +28,7 @@ export function StorySection({ data }) {
   const quoteRef = useRef(null);
   const citeRef = useRef(null);
   const narrativeRef = useRef(null);
+  const coupleLineRef = useRef(null);
   const svgRef = useRef(null);
   const planeRef = useRef(null);
   const reduced = useReducedMotion();
@@ -53,7 +54,24 @@ export function StorySection({ data }) {
           transformOrigin: "50% 50%",
           opacity: 1,
         });
+        if (coupleLineRef.current) {
+          gsap.set(coupleLineRef.current, { opacity: 1, y: 0 });
+        }
         return;
+      }
+
+      if (coupleLineRef.current) {
+        gsap.from(coupleLineRef.current, {
+          opacity: 0,
+          y: 40,
+          duration: 1.05,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top 78%",
+            toggleActions: "play none none reverse",
+          },
+        });
       }
 
       const blocks = [quoteRef.current, citeRef.current, narrativeRef.current].filter(
@@ -108,7 +126,7 @@ export function StorySection({ data }) {
     }, rootRef);
 
     return () => ctx.revert();
-  }, [reduced]);
+  }, [reduced, data.coupleLine]);
 
   return (
     <Section
@@ -147,48 +165,61 @@ export function StorySection({ data }) {
                 "max-w-xl text-pretty text-base leading-relaxed text-ink-700/90 sm:text-lg",
                 reduced && "opacity-100",
               )}
-            >
-              {data.narrative}
-            </p>
+              dangerouslySetInnerHTML={{ __html: data.narrative }}
+            />
           </div>
 
-          <div
-            ref={svgRef}
-            className="relative flex min-h-[14rem] items-center justify-center lg:min-h-[18rem]"
-            aria-hidden
-          >
-            <svg
-              viewBox="0 0 400 240"
-              className="h-full w-full max-w-md overflow-visible text-nude-300/90"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+          <div className="flex flex-col gap-0 lg:gap-8">
+            {data.coupleLine ? (
+              <p
+                ref={coupleLineRef}
+                className={cn(
+                  "text-center text-[clamp(2.3rem,6.5vw,3rem)] leading-tight text-gold-500",
+                  reduced && "opacity-100",
+                )}
+                style={{ fontFamily: "var(--font-script)" }}
+              >
+                {data.coupleLine}
+              </p>
+            ) : null}
+            <div
+              ref={svgRef}
+              className="relative flex min-h-[14rem] items-center justify-center lg:min-h-[18rem]"
+              aria-hidden
             >
-              <path
-                className="path-flight"
-                d="M20 200 C 100 40, 200 220, 380 40"
-                stroke="currentColor"
-                strokeWidth="1.25"
-                strokeLinecap="round"
-                strokeDasharray="6 10"
-              />
-              <g
-                transform={`translate(20 200) scale(${STORY_HEART_SCALE}) translate(-12 -12)`}
-                className="text-gold-500/90"
+              <svg
+                viewBox="0 0 400 240"
+                className="h-full w-full max-w-md overflow-visible text-nude-300/90"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <path fill="currentColor" d={LUCIDE_HEART_PATH_D} />
-              </g>
-              <g
-                transform={`translate(380 40) scale(${STORY_HEART_SCALE}) translate(-12 -12)`}
-                className="text-gold-500/90"
-              >
-                <path fill="currentColor" d={LUCIDE_HEART_PATH_D} />
-              </g>
-              <g ref={planeRef} className="text-ink-800">
-                <g transform={`translate(-12,-12) scale(${STORY_PLANE_SCALE})`}>
-                  <path fill="currentColor" d={LUCIDE_PLANE_PATH_D} />
+                <path
+                  className="path-flight"
+                  d="M20 200 C 100 40, 200 220, 380 40"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeDasharray="6 10"
+                />
+                <g
+                  transform={`translate(20 200) scale(${STORY_HEART_SCALE}) translate(-12 -12)`}
+                  className="text-gold-500/90"
+                >
+                  <path fill="currentColor" d={LUCIDE_HEART_PATH_D} />
                 </g>
-              </g>
-            </svg>
+                <g
+                  transform={`translate(380 40) scale(${STORY_HEART_SCALE}) translate(-12 -12)`}
+                  className="text-gold-500/90"
+                >
+                  <path fill="currentColor" d={LUCIDE_HEART_PATH_D} />
+                </g>
+                <g ref={planeRef} className="text-ink-800">
+                  <g transform={`translate(-12,-12) scale(${STORY_PLANE_SCALE})`}>
+                    <path fill="currentColor" d={LUCIDE_PLANE_PATH_D} />
+                  </g>
+                </g>
+              </svg>
+            </div>
           </div>
         </div>
       </Container>
