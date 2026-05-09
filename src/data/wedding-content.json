@@ -1,6 +1,6 @@
 {
   "intro": {
-    "enabled": true,
+    "enabled": false,
     "showOncePerSession": false,
     "openInviteLabel": "Abrir convite",
     "openDurationSec": 3,
