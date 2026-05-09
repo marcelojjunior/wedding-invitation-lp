@@ -74,13 +74,10 @@ export function PassportIntro({ intro, onComplete, skipAnimation }) {
   if (skipAnimation) return null;
 
   return (
-    <motion.div
+    <div
       className="fixed inset-0 z-[400] overscroll-none touch-none"
       style={{ perspective: "1700px", perspectiveOrigin: "left center" }}
       data-lenis-prevent
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: introFadeInSec, ease: softEase }}
       role="dialog"
       aria-modal="true"
       aria-label={`${intro.topLabel} — ${intro.subLabel}`}
@@ -107,13 +104,13 @@ export function PassportIntro({ intro, onComplete, skipAnimation }) {
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400",
           "disabled:pointer-events-none disabled:opacity-0",
         )}
-        initial={{ opacity: 0, y: 16, x: "-50%" }}
+        initial={{ opacity: 1, y: 0, x: "-50%" }}
         animate={{
           opacity: hingeOpen ? 0 : 1,
           y: hingeOpen ? 24 : 0,
           x: "-50%",
         }}
-        transition={{ duration: 0.4, ease: softEase }}
+        transition={{ duration: 0.3, ease: softEase }}
         disabled={hingeOpen}
         onClick={() => setHingeOpen(true)}
       >
@@ -139,11 +136,10 @@ export function PassportIntro({ intro, onComplete, skipAnimation }) {
             "flex h-full w-full flex-col items-center justify-center bg-transparent px-6 pb-28 pt-16 text-center sm:pb-32",
             "border-r border-gold-500/25 shadow-[16px_0_48px_-12px_rgba(47,40,32,0.12),inset_0_0_0_1px_rgba(184,149,106,0.18)]",
           )}
-          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: introFadeInSec * 0.95,
-            delay: introFadeInSec * 0.12,
+            duration: Math.min(introFadeInSec, 0.38),
             ease: softEase,
           }}
         >
@@ -157,6 +153,7 @@ export function PassportIntro({ intro, onComplete, skipAnimation }) {
                 src={coverLogoSrc}
                 alt={coverLogoAlt}
                 decoding="async"
+                fetchPriority="high"
                 className="h-auto w-full max-w-[min(85vw,280px)] object-contain sm:max-w-[min(72vw,320px)]"
               />
             </div>
@@ -178,6 +175,6 @@ export function PassportIntro({ intro, onComplete, skipAnimation }) {
           </div>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
