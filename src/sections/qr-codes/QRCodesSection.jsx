@@ -1,11 +1,44 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Gift, Plane, Sparkles } from "lucide-react";
+import { Check, Copy, Gift, Plane, Sparkles } from "lucide-react";
 import { QRCode } from "react-qr-code";
 import { Container } from "../../components/layout/Container";
 import { Section } from "../../components/layout/Section";
 import { GlassCard } from "../../components/ui/GlassCard";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { cn } from "../../utils/cn";
+
+function PixKeyRow({ pixKey }) {
+  const [copied, setCopied] = useState(false);
+
+  function handleCopy() {
+    navigator.clipboard.writeText(pixKey).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
+  return (
+    <div className="relative mt-6 flex items-center justify-center gap-2">
+      <span className="font-mono text-sm font-medium tracking-wide text-gold-500">
+        {pixKey}
+      </span>
+      <button
+        type="button"
+        onClick={handleCopy}
+        aria-label="Copiar chave PIX"
+        className={cn(
+          "flex size-7 items-center justify-center rounded-boarding border transition-colors duration-200",
+          copied
+            ? "border-green-500/40 bg-green-50 text-green-600"
+            : "border-ink-800/15 bg-white/50 text-gold-500 hover:bg-white/80 hover:text-gold-400",
+        )}
+      >
+        {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+      </button>
+    </div>
+  );
+}
 
 const accentById = {
   rsvp: "from-butter-200/50 to-transparent",
@@ -44,8 +77,7 @@ export function QRCodesSection({ cards }) {
         <div className="grid gap-8 md:grid-cols-3">
           {cards.map((card, index) => {
             const Icon = icons[card.id] ?? Sparkles;
-            const qrValue =
-              card.id === "pix" && card.pixCopyPaste ? card.pixCopyPaste : card.url;
+            const qrValue = card.url;
             return (
               <motion.article
                 key={card.id}
@@ -86,29 +118,43 @@ export function QRCodesSection({ cards }) {
 
                   <div className="relative mt-8 flex justify-center">
                     <div className="rounded-2xl border border-white/60 bg-white/70 p-4 shadow-inner">
-                      <QRCode
-                        value={qrValue}
-                        size={132}
-                        level="M"
-                        fgColor="#2f2820"
-                        bgColor="#faf6ef"
-                        title={`QR code: ${card.title}`}
-                        role="img"
-                      />
+                      {card.id === "pix" && card.pixQrImage ? (
+                        <img
+                          src={card.pixQrImage}
+                          alt="QR Code PIX"
+                          width={132}
+                          height={132}
+                          className="block"
+                        />
+                      ) : (
+                        <QRCode
+                          value={qrValue}
+                          size={132}
+                          level="M"
+                          fgColor="#2f2820"
+                          bgColor="#faf6ef"
+                          title={`QR code: ${card.title}`}
+                          role="img"
+                        />
+                      )}
                     </div>
                   </div>
 
-                  <a
-                    href={card.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={cn(
-                      "relative mt-6 text-center text-sm font-medium text-gold-500 underline-offset-4",
-                      "hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400 rounded-sm",
-                    )}
-                  >
-                    Acessar link
-                  </a>
+                  {card.id === "pix" && card.pixKey ? (
+                    <PixKeyRow pixKey={card.pixKey} />
+                  ) : (
+                    <a
+                      href={card.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={cn(
+                        "relative mt-6 text-center text-sm font-medium text-gold-500 underline-offset-4",
+                        "hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400 rounded-sm",
+                      )}
+                    >
+                      Acessar link
+                    </a>
+                  )}
                 </GlassCard>
               </motion.article>
             );
