@@ -132,7 +132,7 @@ export function StorySection({ data }) {
     <Section
       id="story"
       ref={rootRef}
-      className="border-t border-ink-800/5 bg-cream-100 pt-24 pb-14 sm:pt-32 sm:pb-20"
+      className="border-t border-ink-800/5 bg-cream-100/80 pt-24 pb-14 sm:pt-32 sm:pb-20"
       aria-labelledby="story-heading"
     >
       <Container>
