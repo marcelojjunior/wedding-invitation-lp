@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { FloatingParticles } from "./FloatingParticles";
 import { LenisNavigationContext } from "../../providers/lenis-context";
 import { cn } from "../../utils/cn";
 
@@ -79,19 +78,22 @@ export function SimpleCoverIntro({ intro, onComplete, skipAnimation }) {
       aria-modal="true"
       aria-label={`${intro.topLabel} — ${intro.subLabel ?? intro.coupleLine}`}
     >
-      <div className="absolute inset-0 -z-10 overflow-hidden bg-gradient-to-b from-cream-50 via-cream-100 to-champagne-200">
-        <div className="absolute -left-24 top-1/4 h-[38rem] w-[38rem] rounded-full bg-butter-200/35 blur-[120px]" />
-        <div className="absolute -right-32 bottom-0 h-[32rem] w-[32rem] rounded-full bg-gold-400/15 blur-[100px]" />
-        <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.55),transparent_55%)]"
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <img
+          src="/couple.jpeg"
+          alt=""
           aria-hidden
+          decoding="async"
+          fetchPriority="high"
+          className="h-full w-full object-cover object-center"
         />
-        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/15 to-black/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_60%,transparent_40%,rgba(0,0,0,0.35)_100%)]" />
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col items-center justify-center px-6 pb-32 pt-16 text-center sm:pb-36">
-        <div className="mx-auto flex max-w-md flex-col items-center gap-8 sm:gap-10">
-          <p className="font-serif text-[0.68rem] font-medium uppercase tracking-[0.42em] text-gold-500 sm:text-xs">
+      <div className="flex min-h-0 flex-1 flex-col items-start justify-start px-6 pb-32 pt-14 text-center sm:pt-16 sm:pb-36">
+        <div className="mx-auto flex max-w-md flex-col items-center gap-6 sm:gap-8">
+          <p className="font-serif text-[0.68rem] font-medium uppercase tracking-[0.42em] text-cream-50/80 sm:text-xs">
             {intro.topLabel}
           </p>
 
@@ -101,23 +103,23 @@ export function SimpleCoverIntro({ intro, onComplete, skipAnimation }) {
               alt={coverLogoAlt}
               decoding="async"
               fetchPriority="high"
-              className="h-auto w-full max-w-[min(85vw,280px)] object-contain sm:max-w-[min(72vw,320px)]"
+              className="h-auto w-full max-w-[min(85vw,280px)] object-contain brightness-0 invert sm:max-w-[min(72vw,320px)]"
             />
           </div>
 
           <div className="space-y-5 sm:space-y-6">
             {intro.subLabel ? (
-              <p className="font-serif text-[0.72rem] font-medium uppercase tracking-[0.28em] text-gold-500 sm:text-[0.8rem]">
+              <p className="font-serif text-[0.72rem] font-medium uppercase tracking-[0.28em] text-cream-50/80 sm:text-[0.8rem]">
                 {intro.subLabel}
               </p>
             ) : null}
             <p
-              className="text-[clamp(2.1rem,7vw,3.25rem)] leading-tight text-gold-500"
+              className="text-[clamp(2.1rem,7vw,3.25rem)] leading-tight text-cream-50 drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]"
               style={{ fontFamily: "var(--font-script)" }}
             >
               {intro.coupleLine}
             </p>
-            <p className="font-serif text-sm text-ink-800/90 sm:text-base">
+            <p className="font-serif text-sm text-cream-50/75 sm:text-base">
               {intro.dateLine}
             </p>
           </div>
@@ -128,10 +130,11 @@ export function SimpleCoverIntro({ intro, onComplete, skipAnimation }) {
         type="button"
         className={cn(
           "fixed bottom-8 left-1/2 z-[410] w-[min(calc(100vw-2rem),24rem)] -translate-x-1/2 sm:bottom-10",
-          "rounded-full bg-ink-800 px-8 py-3.5 text-sm font-medium tracking-wide text-cream-50",
-          "shadow-[0_0_0_1px_rgba(47,40,32,0.12),0_12px_36px_-12px_rgba(47,40,32,0.4)]",
-          "transition-[box-shadow] duration-500 ease-out-soft",
-          "hover:shadow-[0_0_0_1px_rgba(184,149,106,0.35),0_16px_44px_-10px_rgba(184,149,106,0.28)]",
+          "rounded-full bg-cream-50/15 px-8 py-3.5 text-sm font-medium tracking-wide text-cream-50",
+          "border border-cream-50/30 backdrop-blur-sm",
+          "shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]",
+          "transition-[background-color,box-shadow] duration-500 ease-out-soft",
+          "hover:bg-cream-50/25 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_16px_44px_-10px_rgba(0,0,0,0.35)]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400",
           "disabled:pointer-events-none disabled:opacity-50",
         )}
